@@ -38,14 +38,13 @@
 			"typings"
 		],
 		"types": [
-			"@types/jest"
+			"vitest/globals"
 		]
 	},
 	"exclude": [
 		"coverage",
 		"dist",
 		"node_modules",
-		"jest.config.js",
 		"rollup.config.js"
 	]
 }
