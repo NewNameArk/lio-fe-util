@@ -1,7 +1,77 @@
-export const getStorage = (key:string) => {
-  return JSON.parse(sessionStorage.getItem(key)!)
-}
+/**
+ * Set storage
+ *
+ * @param name
+ * @param content
+ * @param maxAge
+ */
+ export const setStore = (name: string, content:any, maxAge = null) => {
+  if (!global.window || !name) {
+    return;
+  }
 
-export const removeStorage = (key:string) => {
-  sessionStorage.removeItem(key)
+  if (typeof content !== 'string') {
+    content = JSON.stringify(content)
+  }
+
+  let storage = global.window.localStorage
+
+  storage.setItem(name, content)
+  if (maxAge && !isNaN(parseInt(maxAge))) {
+    let timeout = parseInt(new Date().getTime() / 1000 as unknown as string)
+    storage.setItem(`${name}_expire`, String(timeout + maxAge))
+  }
+};
+
+/**
+ * Get storage
+ *
+ * @param name
+ * @returns {*}
+ */
+export const getStore = (name:string) => {
+  if (!global.window || !name) {
+    return;
+  }
+
+  let content = window.localStorage.getItem(name)
+  let _expire = window.localStorage.getItem(`${name}_expire`)
+
+  if (_expire) {
+    let now = parseInt((new Date().getTime() / 1000) as unknown as string)
+    if (now > Number(_expire) ) {
+      return;
+    }
+  }
+
+  try {
+    return JSON.parse(content!)
+  } catch (e) {
+    return content
+  }
+};
+
+/**
+ * Clear storage
+ *
+ * @param name
+ */
+export const clearStore = (name:string) => {
+  if (!global.window || !name) {
+    return;
+  }
+
+  window.localStorage.removeItem(name)
+  window.localStorage.removeItem(`${name}_expire`)
+};
+
+/**
+ * Clear all storage
+ */
+export const clearAll = () => {
+  if (!global.window) {
+    return;
+  }
+
+  window.localStorage.clear()
 }

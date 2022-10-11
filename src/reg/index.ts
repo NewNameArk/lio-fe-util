@@ -58,6 +58,34 @@ const numberCharChineseReg = /^[A-Za-z0-9\u4e00-\u9fa5]+$/
 // 车辆vin（VIN由17位大写字母或数字组成）
 const vinReg = /^[A-Z0-9]{17}$/
 
+// ip地址
+const ipReg = /^(?:(?:^|,)(?:[0-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])(?:\.(?:[0-9]|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])){3})+$/
+
+
+export {
+  mobilePhoneReg,
+  strictMobilePhoneReg,
+  fixedTelReg,
+  strictFixedTelReg,
+  emailReg,
+  urlReg,
+  urlWithParamsReg,
+  idCardReg,
+  chineseReg,
+  numberReg,
+  number0_9Reg,
+  numGreaterThan0Reg,
+  floatNumberReg,
+  intOrFloatFixed2Reg,
+  charReg,
+  numberCharReg,
+  numberUpperCharReg,
+  specialCharReg,
+  numberCharChineseReg,
+  vinReg,
+  ipReg
+};
+
 
 //更多可参考 https://blog.csdn.net/namechenfl/article/details/99714385
 //正则表达式基础 https://mp.weixin.qq.com/s/eutSdSt5R-D09DXMJZaQ4A
